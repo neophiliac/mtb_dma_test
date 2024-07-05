@@ -132,11 +132,12 @@ int main(void)
 
     /* Transmit header to the terminal */
     /* \x1b[2J\x1b[;H - ANSI ESC sequence for clear screen */
-    Cy_SCB_UART_PutString(KIT_UART_HW, "\x1b[2J\x1b[;H");
+    // Cy_SCB_UART_PutString(KIT_UART_HW, "\x1b[2J\x1b[;H");
 
     Cy_SCB_UART_PutString(KIT_UART_HW, "************************************************************\r\n");
     Cy_SCB_UART_PutString(KIT_UART_HW, "PSoC 6 MCU UART Transmit and Receive using DMA\r\n");
-    Cy_SCB_UART_PutString(KIT_UART_HW, "************************************************************\r\n\n");
+    Cy_SCB_UART_PutString(KIT_UART_HW, "************************************************************\r\n");
+    Cy_SCB_UART_PutString(KIT_UART_HW, sprintf("Y-loop count for tx: %d\r\n", Cy_DMA_Descriptor_GetYloopDataCount(&TxDma_Descriptor_0)));
     Cy_SCB_UART_PutString(KIT_UART_HW, ">> Start typing to see the echo on the screen \r\n\n");
 
     /* Initialize flags */
