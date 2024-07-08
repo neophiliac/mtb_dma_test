@@ -186,7 +186,9 @@ void rx_dma_complete(void)
     Cy_DMA_Channel_ClearInterrupt(RxDma_HW, RxDma_CHANNEL);
 
     /* Check interrupt cause to capture errors. */
-    if (CY_DMA_INTR_CAUSE_COMPLETION == Cy_DMA_Channel_GetStatus(RxDma_HW, RxDma_CHANNEL))
+    int status;
+    status = Cy_DMA_Channel_GetStatus(RxDma_HW, RxDma_CHANNEL);
+    if (CY_DMA_INTR_CAUSE_COMPLETION == status)
     {
         rx_dma_done = 1;
     }
@@ -217,8 +219,10 @@ void tx_dma_complete(void)
 {
     /* Check interrupt cause to capture errors.
     *  Note that next descriptor is NULL to stop descriptor execution */
-    if ((CY_DMA_INTR_CAUSE_COMPLETION    != Cy_DMA_Channel_GetStatus(TxDma_HW, TxDma_CHANNEL)) &&
-        (CY_DMA_INTR_CAUSE_CURR_PTR_NULL != Cy_DMA_Channel_GetStatus(TxDma_HW, TxDma_CHANNEL)))
+   int status;
+   status = Cy_DMA_Channel_GetStatus(TxDma_HW, TxDma_CHANNEL);
+    if ((CY_DMA_INTR_CAUSE_COMPLETION    != status) &&
+        (CY_DMA_INTR_CAUSE_CURR_PTR_NULL != status))
     {
         /* DMA error occurred while TX operations */
         tx_dma_error = 1;
