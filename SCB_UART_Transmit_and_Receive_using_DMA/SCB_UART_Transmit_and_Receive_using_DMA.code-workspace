@@ -17,7 +17,7 @@
         //mtb//      macOS  : $HOME/Library/Application Support/Code/User/settings.json
         //mtb//      Linux  : $HOME/.config/Code/User/settings.json
         //mtb//
-        "modustoolbox.toolsPath": "/home/kls/Projects/ayudamedical/apps/ModusToolbox/tools_2.4",
+        "modustoolbox.toolsPath": "/opt/ModusToolbox/tools_3.2",
         "cortex-debug.armToolchainPath": "${config:modustoolbox.toolsPath}/gcc/bin",
         "cortex-debug.openocdPath": "${config:modustoolbox.toolsPath}/openocd/bin/openocd"
     }
