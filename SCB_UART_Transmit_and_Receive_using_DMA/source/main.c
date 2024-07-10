@@ -157,20 +157,21 @@ int main(void)
         /* Handle RxDma complete */
         if (rx_dma_done==1)
         {
-            /* Ping Pong between rx_dma_uart_buffer_a and rx_dma_uart_buffer_b */
-            /* Ping Pong buffers give firmware time to pull the data out of one or the other buffer */
-            if (DMA_DESCR0 == active_descr)
-            {
-                /* Set source RX Buffer A as source for TxDMA */
-                Cy_DMA_Descriptor_SetSrcAddress(&TxDma_Descriptor_0, (uint32_t *) rx_dma_uart_buffer_a);
-                active_descr = DMA_DESCR1;
-            }
-            else
-            {
-                /* Set source RX Buffer B as source for TxDMA */
-                Cy_DMA_Descriptor_SetSrcAddress(&TxDma_Descriptor_0, (uint32_t *) rx_dma_uart_buffer_b);
-                active_descr = DMA_DESCR0;
-            }
+            Cy_DMA_Descriptor_SetSrcAddress(&TxDma_Descriptor_0, (uint32_t *) rx_dma_uart_buffer_a);
+            // /* Ping Pong between rx_dma_uart_buffer_a and rx_dma_uart_buffer_b */
+            // /* Ping Pong buffers give firmware time to pull the data out of one or the other buffer */
+            // if (DMA_DESCR0 == active_descr)
+            // {
+            //     /* Set source RX Buffer A as source for TxDMA */
+            //     Cy_DMA_Descriptor_SetSrcAddress(&TxDma_Descriptor_0, (uint32_t *) rx_dma_uart_buffer_a);
+            //     active_descr = DMA_DESCR1;
+            // }
+            // else
+            // {
+            //     /* Set source RX Buffer B as source for TxDMA */
+            //     Cy_DMA_Descriptor_SetSrcAddress(&TxDma_Descriptor_0, (uint32_t *) rx_dma_uart_buffer_b);
+            //     active_descr = DMA_DESCR0;
+            // }
 
             Cy_DMA_Channel_SetDescriptor(TxDma_HW, TxDma_CHANNEL, &TxDma_Descriptor_0);
             Cy_DMA_Channel_Enable(TxDma_HW, TxDma_CHANNEL);
@@ -230,5 +231,5 @@ void Isr_UART(void)
     Cy_SCB_UART_ClearTxFifoStatus(KIT_UART_HW, intrSrcTx);
 
     /* RX overflow or RX underflow or RX overflow occured */
-    uart_error = 1;
+ //   uart_error = 1;
 }

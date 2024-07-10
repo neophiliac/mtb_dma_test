@@ -77,12 +77,12 @@ void configure_rx_dma(uint8_t* buffer_a, uint8_t* buffer_b, cy_stc_sysint_t* int
         handle_error();
     }
 
-    /* Initialize descriptor 2 */
-    dma_init_status = Cy_DMA_Descriptor_Init(&RxDma_Descriptor_1, &RxDma_Descriptor_1_config);
-    if (dma_init_status!=CY_DMA_SUCCESS)
-    {
-        handle_error();
-    }
+    // /* Initialize descriptor 2 */
+    // dma_init_status = Cy_DMA_Descriptor_Init(&RxDma_Descriptor_1, &RxDma_Descriptor_1_config);
+    // if (dma_init_status!=CY_DMA_SUCCESS)
+    // {
+    //     handle_error();
+    // }
 
     dma_init_status = Cy_DMA_Channel_Init(RxDma_HW, RxDma_CHANNEL, &RxDma_channelConfig);
     if (dma_init_status!=CY_DMA_SUCCESS)
@@ -94,9 +94,9 @@ void configure_rx_dma(uint8_t* buffer_a, uint8_t* buffer_b, cy_stc_sysint_t* int
     Cy_DMA_Descriptor_SetSrcAddress(&RxDma_Descriptor_0, (uint32_t *) &KIT_UART_HW->RX_FIFO_RD);
     Cy_DMA_Descriptor_SetDstAddress(&RxDma_Descriptor_0, (uint32_t *) buffer_a);
 
-    /* Set source and destination address for descriptor 2 */
-    Cy_DMA_Descriptor_SetSrcAddress(&RxDma_Descriptor_1, (uint32_t *) &KIT_UART_HW->RX_FIFO_RD);
-    Cy_DMA_Descriptor_SetDstAddress(&RxDma_Descriptor_1, (uint32_t *) buffer_b);
+    // /* Set source and destination address for descriptor 2 */
+    // Cy_DMA_Descriptor_SetSrcAddress(&RxDma_Descriptor_1, (uint32_t *) &KIT_UART_HW->RX_FIFO_RD);
+    // Cy_DMA_Descriptor_SetDstAddress(&RxDma_Descriptor_1, (uint32_t *) buffer_b);
 
     Cy_DMA_Channel_SetDescriptor(RxDma_HW, RxDma_CHANNEL, &RxDma_Descriptor_0);
 
